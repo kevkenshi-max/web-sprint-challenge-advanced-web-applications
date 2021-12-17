@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
+import axios from 'axios';
 
 const initialArticle = {
     id:"",
@@ -12,6 +14,7 @@ const initialArticle = {
 const EditForm = (props)=> {
     const [article, setArticle]  = useState(initialArticle);
     const {handleEdit, handleEditCancel, editId} = props;
+    const { push } = useHistory;
 
     const handleChange = (e)=> {
         setArticle({
@@ -20,8 +23,26 @@ const EditForm = (props)=> {
         })
     }
 
+    useEffect(() => {
+        axios.get(`http://localhost:5000/api/articles/${editId}`)
+           .then(resp=> {
+               setArticle(resp.data);
+           })
+           .catch(err => {
+               console.log(err.response);
+           })
+    }, []);
+
     const handleSubmit = (e) => {
         e.preventDefault();
+        axios.put(`http://localhost:5000/api/articles/${editId}`, article)
+           .then(resp=> {
+               props.setArticle(resp.data);
+               push(`/articles/${editId}`);
+           })
+           .catch(err=> {
+               console.log(err);
+           })
         handleEdit(article);
     }
 

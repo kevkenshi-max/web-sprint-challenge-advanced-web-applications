@@ -1,18 +1,43 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { useParams, useHistory } from 'react-router-dom';
 
 import Article from './Article';
 import EditForm from './EditForm';
+
+import axios from 'axios';
+
 
 const View = (props) => {
     const [articles, setArticles] = useState([]);
     const [editing, setEditing] = useState(false);
     const [editId, setEditId] = useState();
+    const { id } = useParams();
+    const { push } = useHistory();
+
+    useEffect(() => {
+        axios.get(`http://localhost:5000/api/articles/${id}`)
+            .then(res=> {
+                setArticles(res.data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }, []);
 
     const handleDelete = (id) => {
+        axios.delete(`http://localhost:5000/api/articles/${id}`)
+          .then(res=> {
+              props.deleteArticle(id);
+              push('/articles');
+          })
+          .catch(err=> {
+              console.log(err);
+          })
     }
 
     const handleEdit = (article) => {
+        push(`/update-article/${article.id}`);
     }
 
     const handleEditSelect = (id)=> {

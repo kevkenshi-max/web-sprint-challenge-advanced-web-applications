@@ -83,8 +83,6 @@ In this project, you will demonstrate your mastery of these skills by creating *
 
 * [ ] In `View.js`, complete `handleDelete` so that a http request is made that deletes the article with the included id. After successfully deleting the article on the api, update local state to reflect these changes.
 
-* [ ] In `View.js`, complete `handleDelete` so that a http request is made that deletes the article with the included id. After successfully deleting the article on the api, update local state to reflect these changes.
-
 * [ ] `editId` is passed into the `EditForm` component. In `EditForm.js`, make a http request on mount to get the article with the id `editId`. Save the result in state.
 
 * [ ] In `View.js`, complete `handleEdit` so that a http request is made that updates the passed in article. Set the editing state to false when the request is complete. After successfully deleting the article on the api, update local state to reflect these changes.
@@ -120,9 +118,10 @@ In this project, you will demonstrate your mastery of these skills by creating *
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. Add your answers below.
 
 1. Explain what a token is used for.
-
+-  A token allow access to an API. Access tokens are received after users successfully authenticate and authorize themselves.
 2. What steps can you take in your web apps to keep your data secure?
-
+-  Enable different access levels, implement reliable passwords, set up automatic backups, keep security subscriptions updated.
 3. Describe how web servers work.
-
+-  At the most basic level, whenever a browser needs a file that is hosted on a web server, the browser requests the file via HTTP. When the request reaches the correct web server, the HTTP server accepts the request, finds the requested document, and sends it back to the browser, also through HTTP.
 4. Which HTTP methods can be mapped to the CRUD acronym that we use when interfacing with APIs/Servers.
+-  Put, Post, Get, Delete.
